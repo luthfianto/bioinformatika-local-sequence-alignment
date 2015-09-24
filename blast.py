@@ -35,8 +35,8 @@ a_index, b_index=center[0], center[1]
 #kiri
 left=min(len( A[0:a_index+3]), len(B[0:b_index+3])); left
 
-a_left=A[a_index+3:a_index+left]
-b_left=B[b_index+3:b_index+left]
+a_left=A[a_index-(left-3):a_index]
+b_left=B[b_index-(left-3):b_index]
 
 leftscorelist=[]
 for i in range(len(a_left)):
@@ -69,12 +69,12 @@ sum(rightscorelist)
 rightscoresum=sum(rightscorelist)
 print(rightscoresum)
 total_score = leftscoresum + centerscore + rightscoresum
-print(total_score)
+#print(total_score)
 
 a_kiri=a_index-len(leftscorelist)
 a_kanan=a_index+3+len(rightscorelist)
 b_kiri=b_index-len(leftscorelist)
 b_kanan=b_index+3+len(rightscorelist)
 print(A[a_kiri:a_kanan])
-print(B[b_kiri:b_kanan])
+print(B[b_kiri:b_kanan], total_score)
 #
