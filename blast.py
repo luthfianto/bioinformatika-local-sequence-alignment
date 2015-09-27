@@ -1,11 +1,6 @@
 from operator import itemgetter
 from Bio.SubsMat.MatrixInfo import blosum62 #import tabel blosum62
 
-A='MMIIPKLQ'
-B='AAPKLMMQ'
-D='AAKKLMMQ'
-C=[B,D]
-
 #fungsi untuk mendapatkan k-mers dari sequence
 def kmers(string, k):
     length = len(string)                
@@ -40,8 +35,6 @@ def blastpair(A,B):
     a_index, b_index=center[0], center[1]
     
     ## iterasi dari tengah ke kiri dan ke kanan
-    left_index = 0
-    right_index= 0
     
     # iterasi kiri
     left=min(len( A[0:a_index+3]), len(B[0:b_index+3])); left
@@ -80,12 +73,10 @@ def blastpair(A,B):
     total_score = leftscoresum + centerscore + rightscoresum
     #print(total_score)
     
-    a_kiri=a_index-len(leftscorelist)
-    a_kanan=a_index+3+len(rightscorelist)
     b_kiri=b_index-len(leftscorelist)
     b_kanan=b_index+3+len(rightscorelist)
     
-    [print('.', end="") for i in range(b_index+2)]
+    [print('.', end="") for i in range(b_index+2)] #print titik/spasi
     print(B[b_kiri:b_kanan], total_score, " <-", B)
     
 #blastpair(A,B)
@@ -96,4 +87,9 @@ def blastdb(query, db):
     for dbsequence in db:        
         blastpair(query, dbsequence)
         
-blastdb(A,C)
+query='MMIIPKLQ' # <- contoh query
+B='AAPKLMMQ' # <- contoh sequence pada db
+D='AAKKLMMQ' # <- contoh sequence pada db
+C=[B,D] # <- contoh db dari sequences
+        
+blastdb(query,C) # <- contoh memanggil blast dengan 1 query dan 1 db
